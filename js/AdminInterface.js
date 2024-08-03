@@ -4,16 +4,16 @@ DisplayExams();
 var createBtnElement = document.querySelector("#createTest");
 createBtnElement.addEventListener('click',()=>
 {
-    window.open("/preTestForm.html" , "_self");
+    window.open("preTestForm.html" , "_self");
 })
 function moveToPreTest()
 {
-    window.open("/preTestForm.html" , "_self");
+    window.open("preTestForm.html" , "_self");
 }
 
 function UpdateExam(index)
 {
-    var url = `/update.html?id=${index}`
+    var url = `update.html?id=${index}`
      window.open(url,"_self")
 }
 
