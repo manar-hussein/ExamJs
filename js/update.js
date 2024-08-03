@@ -74,7 +74,8 @@ function Update (event)
 
    updatedExam.Examquestions = test;
    localStorage.setItem("Exams" , JSON.stringify(Exams));
-  window.open("AdminInterface.html" , "_self")
+  // window.open("AdminInterface.html" , "_self")
+  location.replace("AdminInterface.html" );
 
 }
 

@@ -10,13 +10,14 @@ createBtnElement.addEventListener('click',()=>
 })
 function moveToPreTest()
 {
-    window.open("preTestForm.html" , "_self");
+    // window.open("preTestForm.html" , "_self");
+    location.replace("preTestForm.html");
 }
 
 function UpdateExam(index)
 {
     var url = `update.html?id=${index}`
-     window.open(url,"_self")
+    location.replace(url);
 }
 
 function RemoveExam(index)

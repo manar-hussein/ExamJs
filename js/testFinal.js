@@ -93,7 +93,8 @@ function Create(ev)
           }
           Exams.push(NewExam)
           localStorage.setItem("Exams" ,JSON.stringify(Exams) );
-        window.open("/AdminInterface.html")
+        // window.open("/AdminInterface.html")
+        location.replace("AdminInterface.html");
         
     }else
     {
