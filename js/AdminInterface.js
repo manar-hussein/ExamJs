@@ -4,7 +4,8 @@ DisplayExams();
 var createBtnElement = document.querySelector("#createTest");
 createBtnElement.addEventListener('click',()=>
 {
-    window.open("preTestForm.html" , "_self");
+    // window.open("preTestForm.html" , "_self");
+    window.location.href = "preTestForm.html"
 })
 function moveToPreTest()
 {
