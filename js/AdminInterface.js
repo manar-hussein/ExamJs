@@ -4,11 +4,11 @@ DisplayExams();
 var createBtnElement = document.querySelector("#createTest");
 createBtnElement.addEventListener('click',()=>
 {
-    window.open("/preTestForm.html" , "_self");
+    window.open("preTestForm.html" , "_self");
 })
 function moveToPreTest()
 {
-    window.open("/preTestForm.html" , "_self");
+    window.open("preTestForm.html" , "_self");
 }
 
 function UpdateExam(index)
