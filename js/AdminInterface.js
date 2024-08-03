@@ -5,7 +5,8 @@ var createBtnElement = document.querySelector("#createTest");
 createBtnElement.addEventListener('click',()=>
 {
     // window.open("preTestForm.html" , "_self");
-    window.location.href = "preTestForm.html"
+    // window.location.href = "preTestForm.html"
+    location.replace("preTestForm.html"); 
 })
 function moveToPreTest()
 {
