@@ -1,23 +1,22 @@
 var params = new URLSearchParams(window.location.search);
 var id = params.get('id');
-var Exams =[];
+var Exams = [];
+var ValidateMassegeElement = document.querySelector("#validateMessage");
 
-if(localStorage.getItem("Exams") != null)
-{
-    Exams = JSON.parse(localStorage.getItem("Exams"))
+
+if (localStorage.getItem("Exams") != null) {
+  Exams = JSON.parse(localStorage.getItem("Exams"))
 }
 var updatedExam = Exams[id];
 
-var QuestionElement =  document.querySelector("#testForm");
-
+var QuestionElement = document.querySelector("#testForm");
 var ElementBox = ``;
 
-function DisplayQuestions()
-{
+function DisplayQuestions() {
   for (let index = 0; index < updatedExam.Examquestions.length; index++) {
 
-    ElementBox+=
-    `
+    ElementBox +=
+      `
            <div class="mb-5 question border-bottom border-black border-3 pb-5">
                       <input type="text" class="form-control rounded-0 border-0 border-bottom" name="q1" value="${updatedExam.Examquestions[index].header}"/>
                       <div class="input-group my-5">
@@ -35,57 +34,102 @@ function DisplayQuestions()
                         </select>
                   </div>
     `
-    
+
   }
-  
+
   ElementBox += `<button type="submit" id="sub"  onclick="Update(event)" class="btn custom-btn rounded-pill px-4">Update</button>`
   QuestionElement.innerHTML = ElementBox;
 };
-var updatedQuestions =new Array();
-function GetUpdatedExameInput()
-{
-   var QuestionDivs = QuestionElement.querySelectorAll("#testForm .question")
-   for (let index = 0; index < QuestionDivs.length; index++) {
+var updatedQuestions = [];
+function GetUpdatedExameInput() {
+  var QuestionDivs = QuestionElement.querySelectorAll(".question");
+  updatedQuestions = []; 
+
+  for (let index = 0; index < QuestionDivs.length; index++) {
     var Answers = QuestionDivs[index].querySelectorAll(".input-group input");
-    var CorrectAnswer = QuestionDivs[index].querySelector("#RightAnswer")
+    var CorrectAnswer = QuestionDivs[index].querySelector("#RightAnswer");
     var AnswersValue = [];
-    for (let index = 0; index < Answers.length; index++) {
-      AnswersValue.push(Answers[index].value)
-      
+
+    for (let answerIndex = 0; answerIndex < Answers.length; answerIndex++) {
+      AnswersValue.push(Answers[answerIndex].value);
     }
-    var Question =
-    {
-      header : QuestionDivs[index].querySelector("input").value,
-      answers : AnswersValue,
-      correctAnswer : AnswersValue[CorrectAnswer.value]
+
+    var Question = {
+      header: QuestionDivs[index].querySelector("input").value,
+      answers: AnswersValue,
+      correctAnswer: CorrectAnswer.value
     };
-    updatedQuestions.push(Question)
 
-   }
-   return updatedQuestions;
+    updatedQuestions.push(Question);
+  }
+
+  console.log(updatedQuestions); 
+  return updatedQuestions;
 }
 
-DisplayQuestions();
-
-function Update (event)
-{
+function Update(event) {
   event.preventDefault();
-   var test = GetUpdatedExameInput()
+  var updatedTest = GetUpdatedExameInput();
+  var counter = 0;
 
-   updatedExam.Examquestions = test;
-   localStorage.setItem("Exams" , JSON.stringify(Exams));
-  // window.open("AdminInterface.html" , "_self")
-  location.replace("AdminInterface.html" );
+  for (let index = 0; index < updatedTest.length; index++) {
+    if (!IsQuestionValid(updatedTest[index])) {
+      counter++;
+    }
+  }
 
+  if (counter == 0) {
+    ValidateMassegeElement.classList.add("d-none");
+    updatedExam.Examquestions = updatedQuestions;
+    Exams[id] = updatedExam;
+    localStorage.setItem("Exams", JSON.stringify(Exams));
+    location.replace("AdminInterface.html");
+    console.log("valid")
+  } else {
+    ValidateMassegeElement.classList.remove("d-none");
+    console.log("invalid")
+
+  }
+
+  return counter;
 }
 
-function IsValid(value)
-{
-  if(value != "")
-  {
-    return true;
-  }else 
-  {
+function IsValid(value) {
+  return value !== "";
+}
+
+function IsQuestionValid(QuestionsTest) {
+  if (IsValid(QuestionsTest.header) && IsValid(QuestionsTest.correctAnswer)) {
+    var Counter = CheckAnswersValidation(QuestionsTest.answers);
+    return Counter === 0;
+  } else {
     return false;
   }
 }
+
+function CheckAnswersValidation(AnswersArray) {
+  var Counter = 0;
+  for (let index = 0; index < AnswersArray.length; index++) {
+    if (!IsValid(AnswersArray[index])) {
+      Counter++;
+    }
+  }
+  return Counter;
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  DisplayQuestions();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+

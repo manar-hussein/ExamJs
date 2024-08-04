@@ -5,6 +5,8 @@ var QuestionElement =  document.querySelector("#testForm");
 var ElementBox = ``;
 var ValidateMassegeElement = document.querySelector("#testCreat .container p");
 var Exams =[];
+var admin=JSON.parse( localStorage.getItem("admin_id"))
+
 if(localStorage.getItem("Exams"))
 {
   Exams = JSON.parse(localStorage.getItem("Exams"))
@@ -89,7 +91,8 @@ function Create(ev)
         ValidateMassegeElement.classList.add("d-none")
         NewExam = {
             Name:LanguageName,
-            Examquestions:test
+            Examquestions:test,
+            admin_id:admin
           }
           Exams.push(NewExam)
           localStorage.setItem("Exams" ,JSON.stringify(Exams) );

@@ -8,6 +8,8 @@ var questionEnputElement;
 var tempBox=``;
 var tests;
 var Exams =[];
+var admin=JSON.parse( localStorage.getItem("admin_id"))
+
 if(localStorage.getItem("Exams"))
 {
   Exams = JSON.parse(localStorage.getItem("Exams"))
@@ -29,7 +31,7 @@ function createQuestionInput()
                       </div>
                       <label for="RightAnswer" class="ms-1 mb-3">Right Answer</label>
                       <select id="RightAnswer" class="form-select" aria-label="Default select example">
-                        <option selected value="1" >Answer 1</option>
+                        <option  value="1" >Answer 1</option>
                         <option value="2">Answer 2</option>
                         <option value="3">Answer 3</option>
                         <option value="4">Answer 4</option>
@@ -87,7 +89,8 @@ function CreateTest()
 
   Exam = {
     Name:LanguageName,
-    Examquestions:questions
+    Examquestions:questions,
+    admin_id:admin
   }
 
   // if(IsValid(Exam.Name))

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/all.min.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/global.css" />
+    <link rel="icon" href="img/icon.png">
 </head>
 
 <body>
@@ -38,16 +39,20 @@
         </div>
       </nav>
 
-    <section class="p-5">
+      <section class="p-5">
         <div class="container bg-white p-4 py-5 rounded-3">
             <h1 class="fs-4 text-main mb-3">Please Enter Test Information</h1>
-            <form class="py-5" method="get" action="testFinal.html">
+            <form id="preTestForm" class="py-5" method="get" action="testFinal.html">
                 <div class="mb-5">
-                    <input type="text" class="form-control rounded-0 border-0 border-bottom" name="languageName" placeholder="Language Name"/>
-                </div>
+                    <input required type="text" id="testName" class="form-control rounded-0 border-0 border-bottom" name="languageName" placeholder="Language Name"/>
+                    <div style="color: red; display: none; margin-top: 5px;" id="invalidMessage">Invalid Language name! </div>
+
+                  </div>
                 <div class="mb-5">
-                    <input type="number" class="form-control rounded-0 border-0 border-bottom" name="questionNumbers" placeholder="Question Numbers"/>
-                </div>
+                    <input required id="qNum" type="number" class="form-control rounded-0 border-0 border-bottom" name="questionNumbers" placeholder="Question Numbers"/>
+                    <div id="error-message"  style="color: red; "></div>
+
+                  </div>
                 <button type="submit"  class="btn custom-btn rounded-pill px-4">Create Test</button>
             </form>
             
@@ -56,6 +61,41 @@
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+      var testName = document.getElementById('testName');
+      var invalidMessage = document.getElementById('invalidMessage');
+      function validatelanguageName() {
+        var langName = testName.value.trim();
+        var nameRegex = /^[a-zA-Z0-9]{5,}$/;
+  
+        if (nameRegex.test(langName)) {
+          invalidMessage.style.display = 'none';
+          return true;
+  
+        } else {
+          invalidMessage.style.display = 'block';
+          testName.focus();
+          testName.select();
+          return false;
+        }
+      };
+      testName.addEventListener('blur', validatelanguageName);
+  
+  
+  
+      document.getElementById('preTestForm').addEventListener('submit', function(event) {
+        const numInput = document.getElementById('qNum');
+        const numValue = parseFloat(numInput.value);
+        const errorMessage = document.getElementById('error-message');
+  
+        if (isNaN(numValue) || numValue <= 14) {
+          errorMessage.textContent = 'The number of questions can’t be less than 15.';
+          event.preventDefault(); 
+        } else {
+          errorMessage.textContent = ''; 
+        }
+      });
+    </script>
 </body>
 
 </html>

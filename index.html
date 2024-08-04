@@ -2,37 +2,38 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resgister</title>
-    <link rel="stylesheet" href="css/all.min.css" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/global.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Test</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/index.css" rel="stylesheet">
+    <link rel="icon" href="img/icon.png">
 </head>
 
 <body>
-    <section class="p-5">
-        <div class="container bg-white p-4 py-5 rounded-3">
-            <h1 class="fs-4 text-main mb-3">REGISTRATION</h1>
-            <form class="py-5">
-                <div class="input-group mb-5">
-                    <input type="text" class="form-control me-5 rounded-0 border-0 border-bottom" name="Fname" placeholder="First name" aria-label="Username">
-                    <input type="text" class="form-control border-0 rounded-0 border-bottom" name="Lname" placeholder="Last name" aria-label="Server">
-                  </div>
-                <div class="mb-5">
-                    <input type="password" class="form-control rounded-0 border-0 border-bottom" name="password" placeholder="Password"/>
-                </div>
-                <div class="mb-5">
-                    <input type="email" class="form-control rounded-0 border-0 border-bottom" name="Email" placeholder="Email"/>
-                </div>
-                <p>Already have an account?  <a class="text-decoration-none" href="">Sign In</a></p>
-                <button type="submit" class="btn custom-btn rounded-pill px-4">Register</button>
+    <header class="d-flex justify-content-center align-items-center">
+        <div >
+            <div class="pb-5 head">
+                <h1>Are you a user or admin</h1>
+            </div>
+            <div class="m-auto d-flex justify-content-center gx-3">
+                <form id="f1" method="get" action="Register.html">
+                <button class="btn btn-main me-5 px-5 rounded-pill" type="submit" name="log" value="admin">Admin</button>
             </form>
-            
-        </div>
-    </section>
+                     <form id="f1" method="get" action="Register.html">
+                    <button class="btn btn-main px-5 rounded-pill" type="submit" name="log" value="user">User</button>
+                     </form>
+    
+            </div>
 
+        </div>
+        
+
+    </header>
+     
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>

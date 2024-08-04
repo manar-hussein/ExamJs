@@ -1,3 +1,5 @@
+var admin=JSON.parse( localStorage.getItem("admin_id"))
+console.log(admin)
 var Exames=[];
 var box = ``;
 DisplayExams();
@@ -37,7 +39,8 @@ function DisplayExams()
             Exames= JSON.parse(localStorage.getItem("Exams"));
             console.log(Exames)
             for (let index = 0; index < Exames.length; index++) {
-            box+=
+                if(Exames[index].admin_id==admin)
+          {  box+=
             `
                  <div class="col-md-3">
                             <div class="card">
@@ -52,6 +55,7 @@ function DisplayExams()
         
             `
             }
+        }
             box+=`<button id="createTest" onclick="moveToPreTest()" class="btn custom-btn">Create Exam</button>`
             document.getElementById("row").innerHTML = box;
         }
